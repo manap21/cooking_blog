@@ -36,6 +36,10 @@ class Recipe(models.Model):
     def get_image(self):
         return self.images.first()
 
+    def get_absolute_url(self):
+        from django.urls import reverse
+        return reverse('detail', kwargs={'pk': self.pk})
+
 class Image(models.Model):
     image = models.ImageField(upload_to='recipes')
     recipe = models.ForeignKey(Recipe, on_delete=models.CASCADE, related_name='images')
